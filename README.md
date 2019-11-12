@@ -4,8 +4,8 @@ How to run web
 
 Pre - requisite ->
   Global scope install
-     1. NodeJS 
-     2. Nodemon
+  1. NodeJS 
+  2. Nodemon
     
 Getting Started ->
   1. cd Flight_TicketProject in Terminal or CMD
