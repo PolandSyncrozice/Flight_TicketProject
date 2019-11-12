@@ -2,7 +2,7 @@
 
 How to run web 
 
-Pre - requisite
+Pre - requisite ->
   Global scope install
      1. NodeJS 
      2. Nodemon
