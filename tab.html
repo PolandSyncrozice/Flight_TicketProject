@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="icon" href="https://i.imgur.com/5MTynK0.png" />
+</head>
+
+<title>Select_Flight</title>
+</head>
+
+<body ng-app="myModule" ng-controller="myCtrl">
+
+    <div class="col-6 tabing" style="margin-top:100px;">
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One"
+                    aria-selected="true">
+                    <font>List View </font>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-item" data-toggle="tab" href="#two" role="tab" aria-controls="Two"
+                    aria-selected="false">
+                    <font>Matrix View</font>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="myTabContent" style="background: #fffefe">
+            <div id='tabRound' class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+                <p id="appending">3 of 3 shown - </p>
+
+                </p>
+
+
+                <table class="table table-sm table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" style='text-decoration: underline;color:blue'>Price</th>
+                            <th scope="col" style='text-decoration: underline;color:blue'>Airline</th>
+                            <th scope="col" style='text-decoration: underline;color:blue'>Take-off</th>
+                            <th scope="col" style='text-decoration: underline;color:blue'>Landing</th>
+                            <th scope="col" style='text-decoration: underline;color:blue' class="text-center">Stop
+                                (Duration)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticket">
+                        <tr ng-repeat="x in response.data">
+                            <div>
+                                <th scope="row">{{'$'+x.price}} <br>
+                                    <a href="" ng-click="Flight_Detail(x)" style="text-decoration: underline;">select
+                                    </a>
+                                </th>
+                            </div>
+
+                            <div>
+                                <td ng-if="x.airline == 'El Al lsrael Air'"> {{x.airline}} <img id="airLinesIcon"
+                                        src="./img/isarael.jpg"></img></td>
+                                <td ng-if="x.airline == 'Singapore Air'"> {{x.airline}} <img id="airLinesIcon"
+                                        src="./img/sing.jpg"></img></td>
+                            </div>
+                            <td>{{x.takeoffTime}}</td>
+                            <td>{{x.landingTime}}</td>
+
+                            <div>
+                                <td ng-if="x.airline == 'Singapore Air'" align="center">
+                                    {{1 + ' ( ' + x.travelHours + ' )'}} <p></p>
+
+                                    <a id="linker" href="#" ng-click="Flight_Detail(x)">details</a> <span
+                                        class="fas fa-print" id="icons"> </span>
+
+                                    <span class="fa fa-envelope" id="icons"> </span>
+                                    <span class="fas fa-heart" id="icons"> </span>
+                                    <span class="fas fa-trash" id="icons"> </span>
+                                </td>
+                                <td ng-if="x.airline == 'El Al lsrael Air'" align="center">
+                                    {{1 + ' ( ' + x.travelHours + ' )'}} <p></p>
+
+                                    <a id="linker" href="#" ng-click="Flight_Detail(x)">details</a> <span
+                                        class="fas fa-print" id="icons"> </span>
+
+                                    <span class="fa fa-envelope" id="icons"> </span>
+                                    <span class="fas fa-heart" id="icons"> </span>
+                                    <span class="fas fa-trash" id="icons"> </span>
+
+                                </td>
+                            </div>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">
+                                < </a> </li> <li class="page-item"><a class="page-link" href="#">1</a></li>
+
+                        <li class="page-item">
+                            <a class="page-link" href="#"> > </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div ng-show="check_Click">
+
+                    <h5 id="headerOutBound">OUTBOUND</h5>
+
+                    <p>
+                        {{currentDay}}
+
+                        <center>
+
+                        </center>
+                        <div>
+
+                            <div class="card text-center">
+                                <div class="card-header">
+
+                                    <h5 class="card-title" ng-if="flight.airline == 'El Al lsrael Air'">
+                                        {{flight.airline}}
+                                        <img id="airLinesIcon" src="./img/isarael.jpg"></img>
+                                    </h5>
+                                    <h5 class="card-title" ng-if="flight.airline == 'Singapore Air'"> {{flight.airline}}
+                                        <img id="airLinesIcon" src="./img/sing.jpg"></img>
+
+                                    </h5>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <h1>{{flight.takeoffTime}} </h1>
+                                    <p class="card-text">{{convertCapitalName(flight.fromAirport)}} </p>
+                                    <h2>To</h2>
+                                    <p class="card-text">{{convertCapitalName(flight.toAirport)}} </p>
+                                    <h1>{{flight.landingTime}} </h1>
+
+                                    <p>-------------------------------------------------------------------------------------
+                                    </p>
+                                    <p class="card-text">TravelHours: {{flight.travelHours}} </p>
+                                    <p class="card-text">TransitFlight Round: {{flight.transitNumber}} times</p>
+                                    <p>-------------------------------------------------------------------------------------
+                                    </p>
+                                    <div>
+                                        <div ng-repeat="counting in [] | range:flight.transitNumber">
+                                            <p class="card-text"> Change Planes - Round {{counting+1}} at
+                                                {{flight.transits[counting].transitCountry}} :
+                                                {{convertCampHour(flight.transits[counting].transitHours)}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <p></p>
+                            <!---Inbound-->
+                            <div ng-if="triper == 'Round Trip'">
+                                <h5 id="headerOutBound">INBOUND</h5>
+
+                                <p>
+                                    {{currentDay}}
+
+                                    <center>
+
+                                    </center>
+                                    <div>
+
+                                        <div class="card text-center">
+                                            <div class="card-header">
+
+                                                <h5 class="card-title" ng-if="flight.airline == 'El Al lsrael Air'">
+                                                    {{flight.airline}}
+                                                    <img id="airLinesIcon" src="./img/isarael.jpg"></img>
+                                                </h5>
+                                                <h5 class="card-title" ng-if="flight.airline == 'Singapore Air'">
+                                                    {{flight.airline}}
+                                                    <img id="airLinesIcon" src="./img/sing.jpg"></img>
+
+                                                </h5>
+
+                                            </div>
+
+                                            <div class="card-body">
+
+
+                                                <p class="card-text">{{convertCapitalName(flight.toAirport)}} </p>
+                                                <h1>{{flight.landingTime}} </h1>
+                                                <h2>To</h2>
+                                                <h1>{{flight.takeoffTime}} </h1>
+                                                <p class="card-text">{{convertCapitalName(flight.fromAirport)}} </p>
+
+
+
+                                                <p>-------------------------------------------------------------------------------------
+                                                </p>
+                                                <p class="card-text">TravelHours: {{flight.travelHours}} </p>
+                                                <p class="card-text">TransitFlight Round: {{flight.transitNumber}} times
+                                                </p>
+                                                <p>-------------------------------------------------------------------------------------
+                                                </p>
+                                                <div>
+                                                    <div
+                                                        ng-repeat="counting in [] | range:flight.transitNumber |reverse">
+                                                        <p class="card-text" ng-if="counting == '0'"> Change Planes -
+                                                            Round {{counting+1}} at
+                                                            {{flight.transits[counting].transitCountry}} :
+                                                            {{convertCampHour(flight.transits[counting].transitHours)}}
+                                                        </p>
+                                                        <p class="card-text" ng-if="counting == '1'"> Change Planes -
+                                                            Round {{counting-1}} at
+                                                            {{flight.transits[counting].transitCountry}} :
+                                                            {{convertCampHour(flight.transits[counting].transitHours)}}
+                                                        </p>
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--ending-->
+
+                            </div>
+
+                            <center>
+                                <a href="payment.html">
+                                    <button style="margin-top:10px" onclick="toPayment()" type="button"
+                                        class="btn btn-primary btn-lg btn3d">
+                                        <span class="glyphicon glyphicon-cloud"></span>
+                                        Select
+                                    </button>
+                                </a>
+                            </center>
+
+                    </p>
+
+
+                    <label for="favorite-animal">Results per page:</label>
+
+                    <select>
+                        <option value="volvo">10</option>
+                    </select>
+
+                </div>
+
+                <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+        <script src="./js/toPayment.js"></script>
+
+        <script src="./js/search.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+<script>
+
+    var count = 0;
+
+    var rounding = document.getElementById('appending');
+
+    var myArray = JSON.parse(sessionStorage.getItem('myArray'));
+
+    //----------------- 
+
+    // alert(myArray[0].Departing + ' to ' + myArray[0].Returning);
+
+
+    var app = angular.module('myModule', ["ngRoute"]);
+
+    app.config(function ($routeProvider) {
+        $routeProvider.when('/payment', {
+            templateUrl: "payment.html"
+        });
+    });
+
+    app.factory('mainInfoFactory', ['$http', '$timeout', function ($http, $timeout) {
+
+   
+
+        var getData = function () {
+            return $http.get("https://api.myjson.com/bins/zikc4")
+                .then(
+                    function successCallback(response) {
+                        $timeout(function () {    
+            alert('กำลังเชื่อมต่อ :- หน้าเลือกสายการบิน');
+            alert('เชื่อมต่อสำเร็จ !');
+                     }, 500);
+                      
+                        var _response = response;
+
+                        return {
+                            getMyInfo: function () {
+                                return _response;
+                            }
+                        };
+                    },
+                    function errorCallback(response) {
+                        alert("Unable to connecting server");
+                    }
+                );
+
+        }
+        return { getData: getData };
+    }]);
+
+
+    app.filter('range', function () {
+        return function (input, total) {
+            total = parseInt(total);
+
+            for (var i = 0; i < total; i++) {
+                input.push(i);
+            }
+
+            return input;
+        };
+    });
+
+    app.filter('reverse', function () {
+        return function (items) {
+            return items.slice().reverse();
+        };
+    });
+
+    app.controller('myCtrl', ['$scope', 'mainInfoFactory', function ($scope, mainInfoFactory) {
+
+        mainInfoFactory.getData().then(function (response) {
+            $scope.response = response.getMyInfo();
+
+        });
+
+        $scope.triper = myArray[0].flightRound;
+
+        var DayOfWeek = function (today) {
+
+            var _arrDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday"];
+
+            var _today = today;
+
+            return {
+                get today() { return _today; },
+                get arrDayOfWeek() { return _arrDayOfWeek; },
+                getDayOfWeek: function () {
+                    return _arrDayOfWeek[_today]; //get current_NameDay
+                }
+            };
+        }
+
+        var MonthOfYear = function (month) {
+
+            var _MonthOfYear = ["January", "Fabuary", "March", "April", "May", "June",
+                "July", "September", "August", "October", "November", "December"];
+
+            var _month = month;
+
+            return {
+                get month() { return _month; },
+                get arrMonthOfYear() { return _MonthOfYear; },
+                getMonthOfYear: function () {
+                    return _MonthOfYear[_month]; //get current_NameDay
+                }
+            };
+        }
+
+        function lastNameDayofMonth(days) {
+            var presentDay = "" + days;
+            if (presentDay == "1" || presentDay == "11" || presentDay == "21" || presentDay == "31") {
+                return presentDay + "st";
+            } else if (presentDay == "2" || presentDay == "12" || presentDay == "22") {
+                return presentDay + "rd";
+            } else {
+                return presentDay + "th";
+            }
+        }
+
+        $scope.Flight_Detail = function (object) {
+            $scope.check_Click = true;
+            $scope.flight = object;
+
+            selectFlight = object;
+
+            $scope.convertCapitalName = function (str) {
+                if (str == 'BKK') {
+                    return 'Suvarnabhumi';
+                }
+                if (str == 'CDG') {
+                    return 'Paris - Charles-de-Gaulle';
+                }
+            }
+
+            $scope.convertCampHour = function (str) {
+                var track = "" + str;
+                track.split(/[.]/);
+
+                if (track[3] != undefined) {
+                    return track[0] + 'h ' + track[2] + track[3] + 'm \r\n';
+                } else {
+                    return track[0] + 'h ' + track[2] + '0' + 'm \r\n';
+                }
+            }
+
+            var dateToday = new Date();
+            var dayNaming = new DayOfWeek(dateToday.getDay());
+            var monthNaming = new MonthOfYear(dateToday.getMonth());
+            $scope.currentDay = dayNaming.getDayOfWeek() + ', ' + monthNaming.getMonthOfYear() + ' '
+                + lastNameDayofMonth(dateToday.getDate()) + ', ' + dateToday.getFullYear();
+        }
+
+    }]);
+
+
+    //------------------
+
+</script>
+
+<style>
+    /* .nav{
+    box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
+    border-radius: 0.15rem;
+} */
+    #headerOutBound {
+        color: #007bff;
+        font-size: 18px;
+    }
+
+    #airLinesIcon {
+        margin-left: 10px;
+        width: 26px;
+        height: 26px
+    }
+
+    #icons {
+        color: gray;
+        margin-right: 10px;
+    }
+
+    #linker {
+        text-decoration: underline;
+        color: gray;
+        margin-right: 10px;
+    }
+
+    body {
+        background-image: url("img/flight-airplane-cloud-and-sun-ray-backgrounds-wallpapers.jpg")
+    }
+
+    .box {
+        width: 40%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 35px;
+        border: 2px solid #fff;
+        border-radius: 20px/50px;
+        background-clip: padding-box;
+        text-align: center;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 10px;
+        color: #fff;
+        border: 2px solid #06D85F;
+        border-radius: 20px/50px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+    }
+
+    .button:hover {
+        background: #06D85F;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+
+
+
+    .tabing {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+    .btn3d {
+        transition: all .08s linear;
+
+        outline: medium none;
+
+        border: 0px;
+
+    }
+
+    .btn3d:focus {
+        outline: medium none;
+
+    }
+
+    .btn3d:active {
+        top: 9px;
+    }
+
+    .btn-primary {
+        box-shadow: 0 0 0 1px #428bca inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+        background-color: #428bca;
+    }
+
+    #nav-item {
+        margin-left: 10px;
+    }
+
+    .nav-link[aria-selected=false] {
+        background-image: linear-gradient(to bottom, #e7c1c1, #ebccd2, #eed8e1, #f1e4ed, #f5f0f6, #f8f5f9, #fbfafc, #ffffff, #ffffff, #ffffff, #ffffff, #ffffff);
+        text-decoration: underline
+    }
+
+    .nav-link[aria-selected=true] font {
+        color: black;
+    }
+</style>

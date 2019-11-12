@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="icon" href="https://i.imgur.com/5MTynK0.png" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+  <title>Search_Flight</title>
+
+</head>
+
+<body style="background:blue ;">
+
+
+
+  <div class="container-fluid">
+
+    <!------------------ HEADER ------------------------>
+    <div class="container-fluid">
+
+      <div class="container">
+        <div class="row">
+
+          <div class="col-sm-5 order-md-1 order-sm-2 order-2 from-group">
+            <h1>FLIGHT</h1>
+          </div>
+
+        </div>
+      </div>
+
+      <!------------------ ROW -1 ------------------------>
+      <div class="container-fluid">
+
+        <div class="container">
+          <div class="row">
+
+            <div class="col-sm-5 order-md-1 order-sm-2 order-2 from-group">
+              <label for="flyingfrom" class="sansserif">Flying Form</label>
+              <input type="text" onkeyup="searchFrom()" id="flyingfrom" class="form-control"
+                placeholder="กรอกชื่อเมืองต้นทาง เช่น bangkok เพื่อแสดงปลายทาง" name="flyingfrom">
+            </div>
+
+            <div class="col-sm-5 order-md-2 order-sm-3 order-3 form-group">
+
+              <label for="flyingto" class="sansserif">Flying To</label>
+              <input type="text" onkeyup="searchTo()" id="flyingto" class="form-control"
+                placeholder="กรอกชื่อเมืองปลายทาง เช่น charles เพื่อแสดงต้นทาง" name="flyingto">
+
+            </div>
+
+            <div class="col-sm-2 order-md-3 order-sm-1 order-1">
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input name="nameRD" onclick="displayRadioValue()" type="radio" id="r1" class="form-check-input "
+                    checked="checked" name="optradio" value="One way">One way
+                </label>
+              </div>
+
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input name="nameRD" onclick="displayRadioValue()" type="radio" id="r2" class="form-check-input"
+                    name="optradio" value="Round Trip">Round Trip
+                </label>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <!------------------ ROW -2 ------------------------>
+        <div class="container">
+          <div class="row">
+
+            <div class="col-sm-5">
+              <label for="departing" class="sansserif">Departing</label>
+              <div class="form-group">
+
+                <select class="form-control" name="departing" id="departing">
+                  <option id="BKK">Suvarnabumi (BKK)</option>
+                  <option id="DMK">Donmueng (DMK)</option>
+                  <option id="CDG">Charles de Gaulle (CDG)</option>
+                </select>
+
+              </div>
+            </div>
+
+            <div class="col-sm-5">
+
+              <label for="returning" class="sansserif">Returning</label>
+
+              <div class="form-group">
+
+
+
+                <select class="form-control" name="returning" id="returning">
+                  <option id="BKK">Suvarnabumi (BKK)</option>
+                  <option id="DMK">Donmueng (DMK)</option>
+                  <option id="CDG" selected>Charles de Gaulle (CDG)</option>
+                </select>
+
+              </div>
+            </div>
+
+            <!------------------ ROW -3 ------------------------>
+            <div class="container">
+              <div class="row">
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label for="adults" class="sansserif">Adults</label>
+                    <select id="adults" class="form-control" style="width:20%">
+                      <option value="1" selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label for="cabin" class="sansserif">Cabin</label>
+                    <select id="cabin" class="form-control" style="width:60%">
+                      <option value="ECONOMY">ECONOMY CLASS</option>
+                      <option value="BUSINESS">BUSINESS CLASS</option>
+                      <option value="1st" selected>FIRST CLASS</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <div class="form-group">
+                        <a href="tab.html">
+                          <button type="button" class="btn btn-danger " onclick="tabPaneComing()">Search</button>
+                        </a>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <script src="./js/search.js"></script>
+
+
+            <script>
+              var app = angular.module('myModule', ["ngRoute"]);
+
+              app.config(function ($routeProvider) {
+                $routeProvider.when('/tab', {
+                  templateUrl: "tab.html"
+                });
+              });
+
+              var chk1 = false;
+
+              var chk2 = false;
+
+              var bangMatch = /b/i;
+
+              var charMatch = /c/i;
+
+              var cond1 = false;
+
+              var cond2 = false;
+
+              var radioChecked = document.getElementById('r1').value;
+
+
+
+              function listDepart() {
+                depSelected = dep.options[dep.selectedIndex].value;
+
+              }
+
+              document.getElementById("departing").onchange = listDepart;
+
+              function listReturn() {
+                retSelected = ret.options[ret.selectedIndex].value;
+
+              }
+
+              document.getElementById("returning").onchange = listReturn;
+
+
+
+              function displayRadioValue() {
+                var ele = document.getElementsByName('nameRD');
+
+                for (i = 0; i < ele.length; i++) {
+                  if (ele[i].checked)
+                    radioChecked = ele[i].value;
+                }
+              }
+
+              var dep = document.getElementById('departing');
+
+              var ret = document.getElementById('returning');
+
+              depSelected = dep.options[dep.selectedIndex].value;
+
+              retSelected = ret.options[ret.selectedIndex].value;
+
+              function searchTo() {
+
+                $("#returning").empty();
+                cond1 = false;
+                cond2 = false;
+                $("#departing").empty();
+                chk1 = false;
+                chk2 = false;
+
+                var txtTo = document.getElementById('flyingto').value;
+
+                var fromValue = document.getElementById('flyingfrom').value;
+
+                if (document.getElementById('r2').checked) {
+                  radioChecked = document.getElementById('r2').value;
+                } else {
+                  radioChecked = document.getElementById('r1').value;
+                }
+
+
+                var flysel = document.getElementById('returning');
+
+                var ToSEL = document.getElementById("departing");
+
+                if (txtTo.match(bangMatch) && cond1 == false) {
+
+                  var bk = document.createElement('option');
+
+                  bk.textContent = 'Suvarnabumi (BKK)';
+
+                  bk.value = 'BKK';
+
+                  bk.setAttribute('id', 'BKK');
+
+                  flysel.appendChild(bk);
+
+                  var mueng = document.createElement('option');
+
+                  mueng.textContent = 'Donmueng (DMK)';
+
+                  mueng.value = 'DMK';
+
+                  mueng.setAttribute('id', 'DMK');
+
+                  flysel.appendChild(mueng);
+
+                  cond1 = true;
+                  //------ Test ----//
+                  var op3 = document.createElement('option');
+
+                  op3.textContent = 'Charles de Gaulle (CDG)';
+
+                  op3.value = 'CDG';
+
+                  op3.setAttribute('id', 'CDG');
+                  ToSEL.appendChild(op3);
+
+                  chk2 = true;
+                  //------ Test ----//
+
+                } else if (txtTo.match(charMatch) && cond2 == false) {
+
+                  var cd = document.createElement('option');
+
+                  cd.textContent = 'Charles de Gaulle (CDG)';
+
+                  cd.value = 'CDG'
+
+                  cd.setAttribute('id', 'CDG');
+                  flysel.appendChild(cd);
+
+                  cond2 = true;
+
+
+                  //------ Test ----//
+
+                  var bang = document.createElement('option');
+
+                  bang.textContent = 'Suvarnabumi (BKK)';
+
+                  bang.value = 'BKK'
+
+                  bang.setAttribute('id', 'BKK');
+
+                  ToSEL.appendChild(bang);
+
+                  var don = document.createElement('option');
+
+                  don.textContent = 'Donmueng (DMK)';
+
+                  don.value = 'DMK';
+
+                  don.setAttribute('id', 'DMK');
+
+                  ToSEL.appendChild(don);
+
+                  chk1 = true;
+                  //------ Test ----//
+                } else if (txtTo == '' && fromValue == '') {
+                  $("#returning").empty();
+                  cond1 = false;
+                  cond2 = false;
+                  $("#departing").empty();
+                  chk1 = false;
+                  chk2 = false;
+                } else if (txtTo == '') {
+                  $("#returning").empty();
+                  cond1 = false;
+                  cond2 = false;
+                }
+
+
+                depSelected = dep.options[dep.selectedIndex].value;
+
+                retSelected = ret.options[ret.selectedIndex].value;
+              }
+
+              function searchFrom() {
+
+                $("#returning").empty();
+                cond1 = false;
+                cond2 = false;
+                $("#departing").empty();
+                chk1 = false;
+                chk2 = false;
+
+                if (document.getElementById('r2').checked) {
+                  radioChecked = document.getElementById('r2').value;
+                } else {
+                  radioChecked = document.getElementById('r1').value;
+                }
+
+                var txt = document.getElementById('flyingfrom').value;
+
+                var toValue = document.getElementById('flyingto').value;
+
+                var sel = document.getElementById("departing");
+
+                var fromSEL = document.getElementById('returning');
+
+
+                if (txt.match(bangMatch) && chk1 == false) {
+
+                  var bang = document.createElement('option');
+
+                  bang.innerText = 'Suvarnabumi (BKK)';
+
+                  bang.value = 'BKK';
+
+                  bang.setAttribute('id', 'BKK');
+
+                  sel.appendChild(bang);
+
+                  var don = document.createElement('option');
+
+                  don.innerText = 'Donmueng (DMK)';
+
+                  don.value = 'DMK';
+
+                  don.setAttribute('id', 'DMK');
+
+                  sel.appendChild(don);
+
+                  chk1 = true;
+
+                  //------ Test ----//
+
+                  var cd = document.createElement('option');
+
+                  cd.textContent = 'Charles de Gaulle (CDG)';
+
+                  cd.value = 'CDG';
+
+                  cd.setAttribute('id', 'CDG');
+                  fromSEL.appendChild(cd);
+
+                  cond2 = true;
+
+                }
+
+                else if (txt.match(charMatch) && chk2 == false) {
+
+                  var op3 = document.createElement('option');
+
+                  op3.textContent = 'Charles de Gaulle (CDG)';
+
+                  op3.value = 'CDG';
+
+                  op3.setAttribute('id', 'CDG');
+                  sel.appendChild(op3);
+
+                  chk2 = true;
+
+                  //------ Test ----//
+                  var gd = document.createElement('option');
+
+                  gd.textContent = 'Suvarnabumi (BKK)';
+
+                  gd.value = 'BKK';
+
+                  gd.setAttribute('id', 'BKK');
+
+                  fromSEL.appendChild(gd);
+
+                  var mg = document.createElement('option');
+
+                  mg.textContent = 'Donmueng (DMK)';
+
+                  mg.value = 'DMK';
+
+                  mg.setAttribute('id', 'DMK');
+
+                  fromSEL.appendChild(mg);
+
+                  cond1 = true;
+
+                } else if (txt == '' && toValue == '') {
+                  $("#returning").empty();
+                  cond1 = false;
+                  cond2 = false;
+                  $("#departing").empty();
+                  chk1 = false;
+                  chk2 = false;
+                } else if (txt == '') {
+                  $("#departing").empty();
+                  chk1 = false;
+                  chk2 = false;
+                }
+
+                depSelected = dep.options[dep.selectedIndex].value;
+
+                retSelected = ret.options[ret.selectedIndex].value;
+              }
+
+
+
+            </script>
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+              integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+              crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+              integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+              crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+              integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+              crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
+
+<style>
+  p {
+    color: white;
+    font-size: 36px;
+  }
+
+  div {
+    color: white;
+  }
+
+  p.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* ------------------------ */
+
+  /* Mixins */
+  /* bg shortcodes */
+  .bg-gradient1 span,
+  .bg-gradient1:before {
+    background: #fa7e29;
+    background: linear-gradient(180deg, #fa7e29 0%, #F6682F 80%, #F6682F 100%);
+  }
+
+  .bg-gradient2 span,
+  .bg-gradient2:before {
+    background: #39C2C9;
+    background: linear-gradient(180deg, #39C2C9 0%, #3FC8C9 80%, #3FC8C9 100%);
+  }
+
+  .pop-onhover.bg-gradient3 span,
+  .pop-onhover.bg-gradient3:before {
+    background: #B9AEF0;
+    background: linear-gradient(180deg, #B9AEF0 0%, #ADA1EB 80%, #ADA1EB 100%);
+  }
+
+  .bg-gradient4 span {
+    background: #F6682F;
+    background: linear-gradient(180deg, #F6682F 0%, #F6682F 80%, #F6682F 100%);
+  }
+
+  /* General */
+  .wrapper {
+    margin: 4% auto;
+    text-align: center;
+  }
+
+  h3 {
+    color: #666a73;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none;
+  }
+
+  /* fancy Button */
+  .fancy-button {
+    display: inline-block;
+    margin: 20px;
+    font-family: 'Heebo', Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    line-height: 24px;
+    color: #ffffff;
+    position: relative;
+  }
+
+  .fancy-button.bg-gradient1 {
+    text-shadow: 0px 0px 1px #BF4C28;
+  }
+
+  .fancy-button.bg-gradient2 {
+    text-shadow: 0px 0px 1px #227270;
+  }
+
+  .fancy-button.bg-gradient3 {
+    text-shadow: 0 0 1px #546082;
+  }
+
+  .fancy-button:before {
+    content: '';
+    display: inline-block;
+    height: 40px;
+    position: absolute;
+    bottom: -1px;
+    left: 10px;
+    right: 10px;
+    z-index: -1;
+    border-radius: 2em;
+    -webkit-filter: blur(14px) brightness(0.9);
+    filter: blur(14px) brightness(0.9);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
+  }
+
+  .fancy-button i {
+    margin-top: -2px;
+    font-size: 1.265em;
+    vertical-align: middle;
+  }
+
+  .fancy-button span {
+    display: inline-block;
+    padding: 16px 20px;
+    border-radius: 50em;
+    position: relative;
+    z-index: 2;
+    will-change: transform, filter;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transition: all 0.3s ease-out;
+  }
+
+  .fancy-button:focus {
+    color: #ffffff;
+  }
+
+  .fancy-button:hover {
+    color: #ffffff;
+  }
+
+  .fancy-button:hover span {
+    -webkit-filter: brightness(0.9) contrast(1.2);
+    filter: brightness(0.9) contrast(1.2);
+    -webkit-transform: scale(0.96);
+    transform: scale(0.96);
+  }
+
+  .fancy-button:hover:before {
+    bottom: 3px;
+    -webkit-filter: blur(6px) brightness(0.8);
+    filter: blur(6px) brightness(0.8);
+  }
+
+  .fancy-button:active span {
+    -webkit-filter: brightness(0.75) contrast(1.7);
+    filter: brightness(0.75) contrast(1.7);
+  }
+
+  .fancy-button.pop-onhover span {
+    border-radius: 4px;
+  }
+
+  .fancy-button.pop-onhover:before {
+    opacity: 0;
+    bottom: 10px;
+  }
+
+  .fancy-button.pop-onhover:hover:before {
+    bottom: -7px;
+    opacity: 1;
+    -webkit-filter: blur(16px);
+    filter: blur(16px);
+  }
+
+  .fancy-button.pop-onhover:hover span {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  .fancy-button.pop-onhover:hover:active span {
+    -webkit-filter: brightness(1) contrast(1);
+    filter: brightness(1) contrast(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: all 0.2s ease-out;
+  }
+
+  .fancy-button.pop-onhover:hover:active:before {
+    bottom: 0;
+    -webkit-filter: blur(5px) brightness(0.85);
+    filter: blur(5px) brightness(0.85);
+    transition: all 0.2s ease-out;
+  }
+
+  .pop-onhover.bg-gradient3 span:hover {
+    background: #B9AEF0;
+    background: linear-gradient(120deg, #B9AEF0 0%, #ADA1EB 80%, #ADA1EB 100%);
+  }
+
+  .bg-gradient4:before {
+    bottom: 2px;
+    opacity: 0.6;
+    transition: all 0.3s ease-out;
+  }
+
+  .bg-gradient4 {
+    transition: all 1s ease;
+  }
+
+  .bg-gradient4 span {
+    outline: 0px solid transparent;
+  }
+
+  .bg-gradient4:hover span {
+    background: #FC3D7C;
+    background: linear-gradient(-25deg, #FC3D7C 0%, #F76A34 80%, #F76A34 100%);
+  }
+
+  .bg-gradient4:focus span,
+  .bg-gradient4:active span {
+    background: #FC3D7C;
+    background: linear-gradient(25deg, #FC3D7C 0%, #F76A34 80%, #F76A34 100%);
+  }
+
+  .bg-gradient4:focus span {
+    box-shadow: 0 0 9px #00FFF8;
+  }
+
+  .bg-gradient4:active span {
+    -webkit-filter: brightness(0.85) contrast(1.3);
+    filter: brightness(0.85) contrast(1.3);
+  }
+
+  .bg-gradient4 span {
+    text-transform: capitalize;
+  }
+</style>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+
+    <link rel="icon" href="https://i.imgur.com/5MTynK0.png" />
+
+</head>
+
+<title>Payment_Flight</title>
+</head>
+
+<body ng-app="myModule" ng-controller="myCtrl">
+
+    <!---------------- Container ------------------>
+    <div class="container-fluid">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-8 tabing" style="margin-top:80px;">
+
+
+                    <div class="tab-content" id="myTabContent" style="background: #fffefe">
+                        <div id='tabRound' class="tab-pane fade show active p-3" id="one" role="tabpanel"
+                            aria-labelledby="one-tab">
+
+                            <!------------------ ROW -1 ------------------------>
+                            <div class="container-fluid" ng-hide="chk_click">
+
+                                <div class="container">
+                                    <div class="row">
+
+                                        <div class="col-sm-2.5">
+
+                                            <label for="titlePerson" class="sansserif">Title <font style="color:red">*
+                                                </font></label>
+                                            <div class="form-group">
+
+                                                <select class="form-control" name="titlePerson" id="titlePerson">
+                                                    <option value="Monsieur">Monsieur</option>
+                                                    <option value="Mistress">Mistress</option>
+                                                    <option value="Miss">Miss</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-sm-3  from-group">
+                                            <label for="firstName" class="sansserif">First name <font style="color:red">
+                                                    *</font></label>
+                                            <input type="text" id="firstName"
+                                                class="form-control" placeholder="กรอกชื่อ" name="firstName">
+                                        </div>
+
+                                        <div class="col-sm-3 form-group">
+                                            <label for="lastName" class="sansserif">Last name <font style="color:red">*
+                                                </font></label>
+                                            <input type="text" id="lastName" class="form-control"
+                                                placeholder="กรอกนามสกุล" name="lastName">
+                                        </div>
+
+                                        <label style="margin-top:5px;">
+                                            Birth Date
+
+                                            <div class="col-sm-1.5 ">
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control myclassDay" id="days" name="days">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </label>
+
+                                        <label style="margin-top:5px;">
+                                            <font style="color:white"> *</font>
+                                            <font style="color:red">*</font>
+                                            <div class="col-sm-1.5 ">
+
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control myclassMonth" id="months" name="months">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </label>
+
+                                        <label style="color:white;margin-top:5px"> *
+                                            <div class="col-sm-1.5 ">
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control myclassYear" id="years" name="years">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!------------------ ROW -2 ------------------------>
+                            <div class="container-fluid" ng-hide="chk_click">
+
+                                <div class="container">
+                                    <div class="row">
+
+
+
+                                        <div class="col-sm-3  from-group">
+                                            <label for="passportID" class="sansserif">Passport No. <font
+                                                    style="color:red">*</font></label>
+                                            <input type="text" id="passportID"
+                                                class="form-control"
+                                                placeholder="กรอกชื่อเมืองต้นทาง เช่น bangkok เพื่อแสดงปลายทาง"
+                                                name="passportID">
+                                        </div>
+
+                                        <div class="col-sm-3 ">
+
+                                            <label for="country" class="sansserif">Country <font style="color:red">*
+                                                </font></label>
+                                            <div class="form-group">
+
+                                                <select class="form-control" id="country" name="country" id="country">
+                                                    <option value="Thailand" selected>Thailand</option>
+                                                    <option value="Paris">Paris</option>
+                                                    <option value="Unied States">Unied States</option>
+                                                </select>
+
+
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <label style="margin-top:5px">Passport Expiration Date
+
+
+
+                                            <div class="col-sm-1.5 ">
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control" id="PassportDays" name="PassportDays">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </label>
+
+                                        <label style="margin-top:5px">
+                                            <font style="color:white"> *</font>
+                                            <font style="color:red">*</font>
+                                            <div class="col-sm-1.5 ">
+
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control" id="PassportMonth"
+                                                        name="PassportMonth">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+                                        </label>
+
+                                        <label style="color:white;margin-top:5px">
+                                            *
+                                            <div class="col-sm-1.5 ">
+
+                                                <div class="form-group">
+
+                                                    <select class="form-control" id="PassportYears"
+                                                        name="PassportYears">
+
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </label>
+
+                            <!--------------------------- WHEN CLICK NEXT --------------------------->
+
+                            <h5 ng-show="chk_click"><img id="firstAidIcon" ng-show="chk_click"
+                                    src="./img/First_Aid_Kit.png"></img>
+
+                                ประกันภัยระหว่างการเดินทาง</h5>
+                            <hr ng-show="chk_click">
+                            <div class="container-fluid" ng-show="chk_click" style="background:white;">
+                                <div class="row">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_1"
+                                            value="checkbox_1" name="checkbox_1" ng-model="checkbox_1"
+                                            ng-click="servicesFee()">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        ประกันกระเป๋าเดินทางหาย หรือ ล่าช้า
+                                        <p>(ราคา 350 บาท)</p>
+
+                                        <p style="color:red; margin-top:20%;"><i class="fa fa-caret-right"
+                                                style="color:orange; margin-right:8%;"
+                                                aria-hidden="true"></i>ดูเพิ่มเติม</p>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <img id="Iconsize" src="./img/insurance.jpg"></img>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="container-fluid" ng-show="chk_click" style="background:white;">
+                                <div class="row">
+
+                                    <div class="form-check">
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_2"
+                                            value="checkbox_2" name="checkbox_2" ng-model="checkbox_2"
+                                            ng-click="servicesFee2()">
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        ประกันอุบัติเหตุและสุขภาพ ระหว่างเดินทาง
+                                        <p>(ราคา 1,300 บาท)</p>
+
+                                        <p style="color:red; margin-top:20%;"><i class="fa fa-caret-right"
+                                                style="color:orange; margin-right:8%;"
+                                                aria-hidden="true"></i>ดูเพิ่มเติม</p>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <img id="Iconsize" src="./img/travel_Insurance.jpg"></img>
+
+                                    </div>
+
+                                </div>
+                                <hr ng-show="chk_click">
+                            </div>
+
+
+
+                            <!--------------------------- Ending -------------------------->
+                            <!------------------ ROW -3 ------------------------>
+                            <div class="container-fluid" ng-hide="chk_click">
+
+                                <div class="container">
+                                    <div class="row">
+
+
+
+                                        <!-- Indicates a successful or positive action -->
+                                        <button style="margin-top:20px;margin-bottom:15px" type="button"
+                                            class="btn btn-success btn-lg btn3d tabing" ng-click="chooseInsurance()">
+                                            <span class="glyphicon glyphicon-cloud"></span>
+                                            Next >
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!------ Next Page ------>
+                            <div class="container-fluid" ng-show="chk_click">
+
+                                <div class="container">
+                                    <div class="row">
+
+
+
+                                        <!-- Indicates a successful or positive action -->
+
+                                        <a href="slip.html" class="tabing">
+                                            <button style="margin-top:20px;margin-bottom:15px" type="button"
+                                                class="btn btn-success btn-lg btn3d" ng-click="chooseInsurance()">
+                                                <span class="glyphicon glyphicon-cloud"></span>
+                                                Next >
+                                            </button>
+                                        </a>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- ------------------------------------ ending ---------------------------------- -->
+
+
+
+                        </div>
+                        <!----------------Ending Container ------------------>
+
+
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------- Payment Information ------------------------------------------- -->
+                <div class="col-sm-4 tabing " style="margin-top:80px;">
+                    <div style="background: #fffefe">
+
+                        <div style="background: rgb(255, 189, 46);padding-bottom:20px;padding-top:20px;">
+                            <center>
+                                <h4>Payment Information</h4>
+                            </center>
+                        </div>
+                        <div id='tabRound' class="tab-pane fade show active p-3" id="one" role="tabpanel"
+                            aria-labelledby="one-tab"></div>
+
+                        <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>Flight : {{priceMyFlight()}} บาท</p>
+                        <hr>
+
+                        <p style="margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>Tax : {{tax}} บาท</p>
+                        <hr>
+
+                        <p style="margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>Services Fee : {{fee}} บาท</p>
+                        <p style="color:red;margin-left:100px;" ng-show="checkPriceTravel">- Travel Insurance 1300 บาท
+                        </p>
+                        <p style="color:red;margin-left:100px;" ng-show="checkPriceBaggage">- Baggage Insurance 350 บาท
+                        </p>
+                        <hr>
+
+                        <p style="margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>Discount : {{discount()}} บาท</p>
+                        <hr>
+                        <center>
+                            <p style="padding-bottom:20px;margin-left:10px;"><i style="margin-right:10px"
+                                    class="fa fa-share" aria-hidden="true"></i>Total : {{priceOfTotalFlight()}} บาท</p>
+                        </center>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+</body>
+
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="./js/toPayment.js"></script>
+
+<script src="./js/search.js"></script>
+
+<script src="./js/strategyPattern.js"></script>
+
+
+<script src="./js/toSliper.js"></script>
+
+<script>
+
+
+
+
+
+    //---------- ending pattern ---------
+
+    var app = angular.module('myModule', ["ngRoute"]);
+
+    //------------ Round Flight ------------------
+    var myArray = JSON.parse(sessionStorage.getItem('myArray'));
+
+    //--------------- In my Flight ----------------
+    var myFlight_Array = JSON.parse(sessionStorage.getItem('myFlight_Array'));
+
+    tax = 1000;
+
+    servicesFee = 0;
+
+    discount = 0;
+
+    priceOfTotalFlight = 0;
+
+    nexting = 0;
+
+
+    newPackaged = new Package();
+
+    var priceBagaged = new Baggage();
+    var priceInsurance = new Insurance();
+
+ 
+
+    app.config(function ($routeProvider) {
+        $routeProvider.when('/slip', {
+            templateUrl: "slip.html"
+        });
+    });
+
+    app.controller('myCtrl', ['$scope', '$timeout', function ($scope,$timeout) {
+        
+        $timeout(function () {
+            alert('กำลังเชื่อมต่อ :- หน้าเลือกการบริการที่มีให้ของสายการบิน');
+            alert('เชื่อมต่อสำเร็จ !');
+        }, 500);
+
+        $scope.priceMyFlight = function () {
+            var DOLLAR_US = 32;
+            var ROUNDTRIP = 2
+            if (myArray[0].flightRound == 'One way') {
+                priceOfTotalFlight = (myFlight_Array[0].price * DOLLAR_US) * 107 / 100;
+                return myFlight_Array[0].price * DOLLAR_US;
+            }
+            if (myArray[0].flightRound == 'Round Trip') {
+                priceOfTotalFlight = (myFlight_Array[0].price * DOLLAR_US * ROUNDTRIP) * 107 / 100;
+                return myFlight_Array[0].price * DOLLAR_US * ROUNDTRIP
+            }
+        }
+
+        $scope.tax = tax;
+
+        $scope.fee = 0;
+
+        $scope.servicesFee = function () {
+            if ($scope.checkbox_1 == true) {
+                $scope.checkPriceBaggage = true;
+                servicesFee = servicesFee + priceBagaged.getPrice();
+                $scope.fee = servicesFee;
+            } else if ($scope.checkbox_1 == false) {
+                $scope.checkPriceBaggage = false;
+                servicesFee = servicesFee - priceBagaged.getPrice();
+                $scope.fee = servicesFee;
+            }
+
+        };
+
+        $scope.servicesFee2 = function () {
+            if ($scope.checkbox_2 == true) {
+                $scope.checkPriceTravel = true;
+                servicesFee = servicesFee + priceInsurance.getPrice();
+                $scope.fee = servicesFee;
+            } else if ($scope.checkbox_2 == false) {
+                $scope.checkPriceTravel = false;
+                servicesFee = servicesFee - priceInsurance.getPrice();
+                $scope.fee = servicesFee;
+            }
+        }
+
+        $scope.chk_click = false;
+
+        $scope.chooseInsurance = function () {
+               //checkValid
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var passportID = document.getElementById("passportID").value;
+
+            if(firstName != '' && lastName != '' && passportID != ''){
+                $scope.chk_click = true;
+           
+           nexting = nexting + 1;
+         
+           if (nexting == 2) {
+               if ($scope.checkbox_1 == true && $scope.checkbox_2 == true) {
+                   newPackaged.addService(priceBagaged);
+                   newPackaged.addService(priceInsurance);
+
+                   //var promo1 = new Promotion1
+                   //newPackaged.getPrivilage(promo1); return ...
+               } else if ($scope.checkbox_1 == true) {
+                   newPackaged.addService(priceBagaged);
+               } else if ($scope.checkbox_2 == true) {
+                   newPackaged.addService(priceInsurance);
+               }
+               nexting = 0;
+               //routing to slip page
+
+               priceOfTotalFlight = priceOfTotalFlight + tax + this.discount() + servicesFee;
+
+               toSliper();
+         }
+            
+            }else{
+                alert('กรุณากรอกให้ครบทุกช่อง !');
+        }
+    }
+
+
+
+        $scope.discount = function () {
+            if ($scope.checkbox_2 == true && $scope.checkbox_1 == true) {
+                return - ((priceInsurance.getPrice() + priceBagaged.getPrice()) * 10) / 100;
+            }
+            return 0;
+        };
+
+        $scope.priceOfTotalFlight = function () {
+            return this.priceMyFlight() + tax + servicesFee + this.discount();
+        };
+    }]);
+
+
+    //--------------- In my Flight -----------------
+
+    //dropdown Days
+    $(function () {
+        var $select = $("#days");
+        for (i = 1; i <= 31; i++) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //dropdown Month
+    $(function () {
+        var $select = $("#months");
+        for (i = 1; i <= 12; i++) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //dropdown Years
+    $(function () {
+        var $select = $("#years");
+        for (i = 2019; i >= 1950; i--) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //get Birth Date
+    $(document).ready(function () {
+
+        $("select#days").change(function () {
+            dayOfBirth = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + dayOfBirth);
+        });
+
+        $("select#months").change(function () {
+            monthOfBirth = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + monthOfBirth);
+        });
+
+        $("select#years").change(function () {
+            yearOfBirth = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + yearOfBirth);
+        });
+
+    });
+
+    //------------------
+
+    //dropdown PassportDay
+    $(function () {
+        var $select = $("#PassportDays");
+        for (i = 1; i <= 31; i++) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //dropdown PassportMonth
+    $(function () {
+        var $select = $("#PassportMonth");
+        for (i = 1; i <= 12; i++) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //dropdown PassportYears
+    $(function () {
+        var $select = $("#PassportYears");
+        for (i = 2035; i >= 2019; i--) {
+
+            $select.append($('<option id=_' + i + '></option>').val(i).html(i))
+
+        }
+
+    }
+
+    );
+
+    //get Passport Date
+    $(document).ready(function () {
+
+        $("select#PassportDays").change(function () {
+            dayOfPassport = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + dayOfPassport);
+        });
+
+        $("select#PassportMonth").change(function () {
+            monthOfPassport = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + monthOfPassport);
+        });
+
+        $("select#PassportYears").change(function () {
+            yearOfPassport = $(this).children("option:selected").val();
+            // alert("You have selected the country - " + yearOfPassport);
+        });
+
+    });
+
+    //------------------
+
+
+</script>
+
+<style>
+    /* .nav{
+    box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
+    border-radius: 0.15rem;
+} */
+    #firstAidIcon {
+        margin-right: 2%;
+        width: 35px;
+        height: 35px;
+    }
+
+    #headerOutBound {
+        color: #007bff;
+        font-size: 18px;
+    }
+
+    #Iconsize {
+        color: gray;
+        width: 300px;
+        height: 150px;
+    }
+
+    #linker {
+        text-decoration: underline;
+        color: gray;
+        margin-right: 10px;
+    }
+
+    body {
+        background-image: url("img/flight-airplane-cloud-and-sun-ray-backgrounds-wallpapers.jpg")
+    }
+
+    .box {
+        width: 40%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 35px;
+        border: 2px solid #fff;
+        border-radius: 20px/50px;
+        background-clip: padding-box;
+        text-align: center;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 10px;
+        color: #fff;
+        border: 2px solid #06D85F;
+        border-radius: 20px/50px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+    }
+
+    .button:hover {
+        background: #06D85F;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    .tabing {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+    .btn3d {
+        transition: all .08s linear;
+
+        outline: medium none;
+
+        border: 0px;
+
+    }
+
+    .btn3d:focus {
+        outline: medium none;
+
+    }
+
+    .btn3d:active {
+        top: 9px;
+    }
+
+    .btn-success {
+        box-shadow: 0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+        background-color: #5cb85c;
+    }
+</style>

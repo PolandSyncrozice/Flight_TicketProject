@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Slip_Flight</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+
+    <link rel="icon" href="https://i.imgur.com/5MTynK0.png" />
+
+
+</head>
+
+<body ng-app="myModule" ng-controller="myCtrl">
+
+    <!---------------- Container ------------------>
+    <div class="container-fluid">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-4 tabing" style="margin-top:80px;">
+
+
+                    <div class="tab-content" id="myTabContent" style="background: #fffefe">
+                        <div id='tabRound' class="tab-pane fade show active p-3" id="one" role="tabpanel"
+                            aria-labelledby="one-tab">
+                            <div style="margin-top:20px" ng-hide="checkOutDetail">
+                                Flight : {{fromAirport()}} <i class="fas fa-arrow-right"></i> {{toAirport()}}
+
+                                <input style="margin-left:70px" class="form-check-input position-static" type="checkbox"
+                                    id="checkbox_5" value="checkbox_5" name="checkbox_5" ng-model="checkbox_5"
+                                    ng-click="showDetail()">
+
+                                Detail
+                            </div>
+                            <p ng-hide="checkOutDetail">Detail ของ Flight</p>
+                            <p ng-hide="checkOutDetail">{{showDetail()}}</p>
+                            <p ng-hide="checkOutDetail" ng-show="!chkDetail">
+                                ----------------------------------------------</p>
+                            <p ng-hide="checkOutDetail" ng-show="!chkDetail">
+                                ----------------------------------------------</p>
+                            <center>
+                                <!-- Indicates a successful or positive action -->
+                                <button style="margin-top:20px;margin-bottom:15px" type="button"
+                                    class="btn btn-success btn-lg btn3d tabing" ng-click="gotoInsurancy()"
+                                    ng-hide="checkOutDetail">
+
+                                    <span class="glyphicon glyphicon-cloud"></span>
+
+                                    Select
+
+                                </button>
+                            </center>
+
+                            <!--------------------------- WHEN CLICK NEXT --------------------------->
+
+
+                            <div class="container-fluid" style="background:white;" ng-show="checkOutDetail">
+                                <div class="row">
+
+                                    <!-- <h5>ราคาประกันภัย</h5>
+
+                                    <div class="form-check">
+
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_1"
+                                            value="checkbox_1" name="checkbox_1" ng-model="checkbox_1"
+                                            ng-click="accidentProtected()">
+                                        ประกันอุบัติเหตุ $ 100
+
+
+                                    </div>
+
+                                
+
+
+
+                                    <div class="col-sm-12">
+
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_2"
+                                            value="checkbox_2" name="checkbox_2" ng-model="checkbox_2"
+                                            ng-click="lostBaggage()">
+
+                                        ประกันกระเป๋า $ 20
+
+
+                                    </div> -->
+
+
+
+                                </div>
+                            </div>
+                            <hr ng-show="checkOutDetail">
+                            <div class="container-fluid" style="background:white;" ng-show="checkOutDetail">
+                                <div class="row">
+                                    <h5>ราคา Service</h5>
+
+                                    <div class="form-check">
+
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_3"
+                                            value="checkbox_3" name="checkbox_3" ng-model="checkbox_3"
+                                            ng-click="postPoneFlight()">
+                                        แจ้งเตือนเที่ยวบินเลื่อน $ 5
+
+
+                                    </div>
+
+                                    <!----------------------------------------------------------------->
+
+
+
+                                    <div class="col-sm-12">
+
+                                        <input class="form-check-input position-static" type="checkbox" id="checkbox_4"
+                                            value="checkbox_4" name="checkbox_4" ng-model="checkbox_4"
+                                            ng-click="smsForTravel()">
+
+                                        แจ้งเตือน SMS ก่อนเดินทาง $ 10
+
+
+                                    </div>
+
+
+
+                                </div>
+                                <hr ng-show="checkOutDetail">
+                            </div>
+                            <!--------------------------- Ending -------------------------->
+
+
+
+
+                        </div>
+                        <!----------------Ending Container ------------------>
+
+
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------- Payment Information ------------------------------------------- -->
+                <div class="col-sm-4 tabing " style="margin-top:80px;">
+                    <div style="background: #fffefe">
+
+                        <div style="background: rgb(255, 189, 46);padding-bottom:20px;padding-top:20px;">
+                            <center>
+                                <h4>PRICE</h4>
+                            </center>
+                        </div>
+                        <div id='tabRound' class="tab-pane fade show active p-3" id="one" role="tabpanel"
+                            aria-labelledby="one-tab"></div>
+
+                        <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>ราคา Flight : {{priceFlight}} $</p>
+
+                        <!-- <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>ราคาประกันภัย : {{accidently}} $</p> -->
+
+                        <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>ราคา Service : {{services}} $</p>
+
+                        <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>ภาษีมูลค่าเพิ่ม (%) : {{taxAirplane()}} $</p>
+
+                        <p style="margin-bottom:30px;margin-left:10px;"><i class="fa fa-share" style="margin-right:10px"
+                                aria-hidden="true"></i>รวมเป็นเงิน : {{totalPrice()}} บาท</p>
+
+                        <center>
+                            <a href="index.html">
+                                <!-- Indicates a successful or positive action -->
+                                <button style="margin-top:20px;margin-bottom:15px" type="button"
+                                    class="btn btn-primary btn-lg btn3d " ng-click="congrate()"
+                                    ng-show="checkOutDetail">
+
+                                    <span class="glyphicon glyphicon-cloud"></span>
+
+                                    Confirm
+
+                                </button>
+                            </a>
+                        </center>
+
+                        <hr>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<script src="./js/toPayment.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/toSliper.js"></script>
+
+<script>
+    var app = angular.module('myModule', ["ngRoute"]);
+
+    var personalData = JSON.parse(sessionStorage.getItem('personalData'));
+
+    var myFlight_Array = JSON.parse(sessionStorage.getItem('myFlight_Array'));
+
+    var myArray = JSON.parse(sessionStorage.getItem('myArray'));
+
+    var printDetail = "Flight_Price : " + myFlight_Array[0].price + '$ ' +
+        "Airline : " + myFlight_Array[0].airline + ' ' +
+        "fromAirport : " + myFlight_Array[0].fromAirport + ' ' +
+        "takeoffTime : " + myFlight_Array[0].takeoffTime + ' ' +
+        "toAirport : " + myFlight_Array[0].toAirport + ' ' +
+        "landingTime : " + myFlight_Array[0].landingTime + ' ' +
+        "Flight_Type : " + myArray[0].flightRound;
+
+    var printDetail2 = "Flight_Price : " + myFlight_Array[0].price + '$ ' +
+        "Airline : " + myFlight_Array[0].airline + ' ' +
+        "fromAirport : " + myFlight_Array[0].toAirport + ' ' +
+        "takeoffTime : " + myFlight_Array[0].takeoffTime + ' ' +
+        "toAirport : " + myFlight_Array[0].fromAirport + ' ' +
+        "landingTime : " + myFlight_Array[0].landingTime + ' ' +
+        "Flight_Type : " + myArray[0].flightRound;
+
+    app.config(function ($routeProvider) {
+        $routeProvider.when('/index', {
+            templateUrl: "index.html"
+        });
+    });
+
+    app.controller('myCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+
+        $timeout(function () {
+            alert('กำลังเชื่อมต่อ :- หน้าแสดงยอดทั้งหมดที่ชำระเงิน');
+            alert('เชื่อมต่อสำเร็จ !');
+        }, 500);
+
+        $scope.priceFlight = myFlight_Array[0].price;
+
+        //fromAirport & toAirport
+        $scope.fromAirport = function () {
+            if (myArray[0].Departing == 'CDG' || myArray[0].Departing == 'Charles de Gaulle (CDG)') {
+                return 'Paris';
+            } else {
+                return 'Bangkok';
+            }
+
+
+        }
+        $scope.toAirport = function () {
+            if (myArray[0].Returning == 'CDG' || myArray[0].Returning == 'Charles de Gaulle (CDG)') {
+                return 'Paris';
+            } else {
+                return 'Bangkok';
+            }
+        }
+
+        $scope.taxAirplane = function () {
+            var vatCountry = 7 / 100;
+            var taxAir = myFlight_Array[0].price * vatCountry
+            return taxAir;
+        }
+
+        //ประกันอุบัติเหตุ ขณะเดินทาง
+        //total accidenly to Baht
+        $scope.accidently = 0;
+        $scope.accidentProtected = function () {
+
+            if ($scope.checkbox_1 == true) {
+                // $scope.checkPriceBaggage = true;
+                $scope.accidently = $scope.accidently + 100;
+            } else if ($scope.checkbox_1 == false) {
+                // $scope.checkPriceBaggage = false;
+                $scope.accidently = $scope.accidently - 100;
+            }
+
+        };
+        //ประกันอุบัติเหตุ กระเป๋า
+        $scope.lostBaggage = function () {
+
+            if ($scope.checkbox_2 == true) {
+                // $scope.checkPriceBaggage = true;
+                $scope.accidently = $scope.accidently + 20;
+            } else if ($scope.checkbox_2 == false) {
+                // $scope.checkPriceBaggage = false;
+                $scope.accidently = $scope.accidently - 20;
+            }
+
+        };
+
+        //บริการเลื่อนเที่ยวบิน
+        //total accidenly to services
+        $scope.services = 0;
+        $scope.postPoneFlight = function () {
+
+            if ($scope.checkbox_3 == true) {
+                // $scope.checkPriceBaggage = true;
+                $scope.services = $scope.services + 5;
+            } else if ($scope.checkbox_3 == false) {
+                // $scope.checkPriceBaggage = false;
+                $scope.services = $scope.services - 5;
+            }
+
+        };
+
+        //บริการแจ้งเตือนเที่ยวบิน
+        $scope.smsForTravel = function () {
+
+            if ($scope.checkbox_4 == true) {
+                // $scope.checkPriceBaggage = true;
+                $scope.services = $scope.services + 10;
+            } else if ($scope.checkbox_4 == false) {
+                // $scope.checkPriceBaggage = false;
+                $scope.services = $scope.services - 10;
+            }
+
+        };
+
+
+        $scope.totalPrice = function () {
+            var Dollar = 32;
+            var allservice = ($scope.services + $scope.accidently) * Dollar;
+            return personalData[0].priceOfTotalFlight + allservice;
+        }
+
+        $scope.checkOutDetail = false;
+
+        $scope.gotoInsurancy = function () {
+            $scope.checkOutDetail = true;
+        }
+
+        $scope.chkDetail = false;
+
+        $scope.showDetail = function () {
+            if ($scope.checkbox_5 == true) {
+
+                $scope.chkDetail = true;
+
+                if (myArray[0].Departing == 'CDG' || myArray[0].Departing == 'Charles de Gaulle (CDG)') {
+                    return printDetail2;
+                } else {
+                    return printDetail;
+                }
+            } else if ($scope.checkbox_5 == false) {
+                $scope.chkDetail = false;
+                return '';
+            }
+        }
+
+        //------------- TEST POST METHOD ------------------ //
+        var httpPostRequest = $http({
+            method: "post",
+            url: "https://reqres.in/api/users",
+            timeout: 5000,
+            data: {
+                "Flight_Price : ": myFlight_Array[0].price,
+                "Airline : ": myFlight_Array[0].airline,
+                "fromAirport : ": myFlight_Array[0].fromAirport,
+                "takeoffTime : ": myFlight_Array[0].takeoffTime,
+                "toAirport : ": myFlight_Array[0].toAirport,
+                "landingTime : ": myFlight_Array[0].landingTime,
+                "Flight_Type : ": myArray[0].flightRound
+            },
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+        );
+        //
+        $scope.congrate = function () {
+
+            alert('กำลังเชื่อมต่อไปยังเซิฟเวอร์');
+
+            httpPostRequest.then(function (response) {
+                //code for success
+                alert('จองเที่ยวบินสำเร็จ !');
+
+            },
+                function (error) {
+                    //code for error
+                    alert('จองเที่ยวบิน ไม่สำเร็จ !');
+
+                    alert("Unable to perform post request");
+                });
+
+
+            alert('มีข้อสงสัยสามารถสอบถามฝ่ายประชาสัมพันธ์ ติดต่อ 077-56xx-xxx !');
+
+        }
+
+
+
+    }]);
+
+
+</script>
+
+</html>
+
+
+<style>
+    #headerOutBound {
+        color: #007bff;
+        font-size: 18px;
+    }
+
+    #Iconsize {
+        color: gray;
+        width: 300px;
+        height: 150px;
+    }
+
+    #linker {
+        text-decoration: underline;
+        color: gray;
+        margin-right: 10px;
+    }
+
+    body {
+        background-image: url("img/flight-airplane-cloud-and-sun-ray-backgrounds-wallpapers.jpg")
+    }
+
+    .box {
+        width: 40%;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 35px;
+        border: 2px solid #fff;
+        border-radius: 20px/50px;
+        background-clip: padding-box;
+        text-align: center;
+    }
+
+    .button {
+        font-size: 1em;
+        padding: 10px;
+        color: #fff;
+        border: 2px solid #06D85F;
+        border-radius: 20px/50px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+    }
+
+    .button:hover {
+        background: #06D85F;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .overlay:target {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    .tabing {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+
+    .btn3d {
+        transition: all .08s linear;
+
+        outline: medium none;
+
+        border: 0px;
+
+    }
+
+    .btn3d:focus {
+        outline: medium none;
+
+    }
+
+    .btn3d:active {
+        top: 9px;
+    }
+
+    .btn-success {
+        box-shadow: 0 0 0 1px #5cb85c inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #4cae4c, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+        background-color: #5cb85c;
+    }
+
+    .btn-primary {
+        box-shadow: 0 0 0 1px #428bca inset, 0 0 0 2px rgba(255, 255, 255, 0.15) inset, 0 8px 0 0 #357ebd, 0 8px 0 1px rgba(0, 0, 0, 0.4), 0 8px 8px 1px rgba(0, 0, 0, 0.5);
+        background-color: #428bca;
+    }
+</style>
