@@ -1,50 +1,82 @@
-var http = require("http"),
-    url = require("url"),
-    path = require("path"),
-    fs = require("fs"),
-    port = process.argv[2] || 8080;
+var express = require("express");
+var app = express();
+var fs = require("fs");
 
-http.createServer(function(request, response) {
-
-  var uri = url.parse(request.url).pathname
-    , filename = path.join(process.cwd(), uri);
-
-  fs.exists(filename, function(exists) {
-    if(!exists) {
-      response.writeHead(404, {"Content-Type": "text/plain"});
-      response.write("404 Not Found\n");
-      response.end();
-      return;
-    }
-
-    if (fs.statSync(filename).isDirectory()) filename += '/index.html';
-
-    fs.readFile(filename, "binary", function(err, file) {
-      if(err) {        
-        response.writeHead(500, {"Content-Type": "text/plain"});
-        response.write(err + "\n");
-        response.end();
-        return;
-      }
-
-      response.writeHead(200);
-      response.write(file, "binary");
-      response.end();
-    });
+app.get("/index.html", function(req, res) {
+  fs.readFile(process.cwd() + "/" + "index.html", "utf8", function(err, data) {
+    res.end(data);
   });
-}).listen(parseInt(port, 10));
+});
 
-console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+app.get("/", function(req, res) {
+  fs.readFile(process.cwd() + "/" + "index.html", "utf8", function(err, data) {
+    res.end(data);
+  });
+});
 
-//EXPRESS_JS
+app.get("/tab.html", function(req, res) {
+  fs.readFile(process.cwd() + "/" + "tab.html", "utf8", function(err, data) {
+    res.end(data);
+  });
+});
 
-// var express = require('express');
-// var app = express();
-// var path = require('path');
+app.get("/slip.html", function(req, res) {
+  fs.readFile(process.cwd() + "/" + "slip.html", "utf8", function(err, data) {
+    res.end(data);
+  });
+});
 
-// // viewed at http://localhost:8080
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname + '/index.html'));
-// });
+app.get("/payment.html", function(req, res) {
+  fs.readFile(process.cwd() + "/" + "payment.html", "utf8", function(
+    err,
+    data
+  ) {
+    res.end(data);
+  });
+});
 
-// app.listen(8080);
+app.get("/js/search.js", function(req, res) {
+  fs.readFile(process.cwd() + "/js/" + "search.js", "utf8", function(
+    err,
+    data
+  ) {
+    res.end(data);
+  });
+});
+
+app.get("/js/strategyPattern.js", function(req, res) {
+  fs.readFile(process.cwd() + "/js/" + "strategyPattern.js", "utf8", function(
+    err,
+    data
+  ) {
+    res.end(data);
+  });
+});
+
+app.get("/js/toPayment.js", function(req, res) {
+  fs.readFile(process.cwd() + "/js/" + "toPayment.js", "utf8", function(
+    err,
+    data
+  ) {
+    res.end(data);
+  });
+});
+
+app.get("/js/toSliper.js", function(req, res) {
+  fs.readFile(process.cwd() + "/js/" + "toSliper.js", "utf8", function(
+    err,
+    data
+  ) {
+    res.end(data);
+  });
+});
+
+var server = app.listen(8080, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+});
+
+console.log(
+  "Static file server running at\n  => http://localhost:8080" +
+    "/\nCTRL + C to shutdown"
+);
