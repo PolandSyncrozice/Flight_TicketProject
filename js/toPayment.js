@@ -2,13 +2,11 @@ var result_flights = [];
 
 var selectFlight;
 
-function toPayment(){
+function toPayment() {
+  result_flights.push(selectFlight);
 
-result_flights.push(selectFlight);
-  
-    window.sessionStorage.setItem('myFlight_Array', JSON.stringify(result_flights));
-  
-    //json write file
-    // location.replace("payment.html");
-  
-  }
+  window.sessionStorage.setItem(
+    "myFlight_Array",
+    JSON.stringify(result_flights)
+  );
+}

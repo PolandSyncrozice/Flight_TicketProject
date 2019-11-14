@@ -318,17 +318,17 @@
 
     app.factory('mainInfoFactory', ['$http', '$timeout', function ($http, $timeout) {
 
-   
+
 
         var getData = function () {
             return $http.get("https://api.myjson.com/bins/zikc4")
                 .then(
                     function successCallback(response) {
-                        $timeout(function () {    
-            alert('กำลังเชื่อมต่อ :- หน้าเลือกสายการบิน');
-            alert('เชื่อมต่อสำเร็จ !');
-                     }, 500);
-                      
+                        $timeout(function () {
+                            alert('กำลังเชื่อมต่อ :- หน้าเลือกสายการบิน');
+                            alert('เชื่อมต่อสำเร็จ !');
+                        }, 500);
+
                         var _response = response;
 
                         return {

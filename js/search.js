@@ -24,7 +24,6 @@ function tabPaneComing(){
 
   window.sessionStorage.setItem('myArray', JSON.stringify(search_result_flights));
 
-  //json write file
-  // location.replace("tab.html");
+
 
 }

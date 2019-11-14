@@ -61,8 +61,8 @@
                                         <div class="col-sm-3  from-group">
                                             <label for="firstName" class="sansserif">First name <font style="color:red">
                                                     *</font></label>
-                                            <input type="text" id="firstName"
-                                                class="form-control" placeholder="กรอกชื่อ" name="firstName">
+                                            <input type="text" id="firstName" class="form-control"
+                                                placeholder="กรอกชื่อ" name="firstName">
                                         </div>
 
                                         <div class="col-sm-3 form-group">
@@ -135,8 +135,7 @@
                                         <div class="col-sm-3  from-group">
                                             <label for="passportID" class="sansserif">Passport No. <font
                                                     style="color:red">*</font></label>
-                                            <input type="text" id="passportID"
-                                                class="form-control"
+                                            <input type="text" id="passportID" class="form-control"
                                                 placeholder="กรอกชื่อเมืองต้นทาง เช่น bangkok เพื่อแสดงปลายทาง"
                                                 name="passportID">
                                         </div>
@@ -426,7 +425,7 @@
     var priceBagaged = new Baggage();
     var priceInsurance = new Insurance();
 
- 
+
 
     app.config(function ($routeProvider) {
         $routeProvider.when('/slip', {
@@ -434,8 +433,8 @@
         });
     });
 
-    app.controller('myCtrl', ['$scope', '$timeout', function ($scope,$timeout) {
-        
+    app.controller('myCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+
         $timeout(function () {
             alert('กำลังเชื่อมต่อ :- หน้าเลือกการบริการที่มีให้ของสายการบิน');
             alert('เชื่อมต่อสำเร็จ !');
@@ -486,40 +485,40 @@
         $scope.chk_click = false;
 
         $scope.chooseInsurance = function () {
-               //checkValid
-    var firstName = document.getElementById("firstName").value;
-    var lastName = document.getElementById("lastName").value;
-    var passportID = document.getElementById("passportID").value;
+            //checkValid
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var passportID = document.getElementById("passportID").value;
 
-            if(firstName != '' && lastName != '' && passportID != ''){
+            if (firstName != '' && lastName != '' && passportID != '') {
                 $scope.chk_click = true;
-           
-           nexting = nexting + 1;
-         
-           if (nexting == 2) {
-               if ($scope.checkbox_1 == true && $scope.checkbox_2 == true) {
-                   newPackaged.addService(priceBagaged);
-                   newPackaged.addService(priceInsurance);
 
-                   //var promo1 = new Promotion1
-                   //newPackaged.getPrivilage(promo1); return ...
-               } else if ($scope.checkbox_1 == true) {
-                   newPackaged.addService(priceBagaged);
-               } else if ($scope.checkbox_2 == true) {
-                   newPackaged.addService(priceInsurance);
-               }
-               nexting = 0;
-               //routing to slip page
+                nexting = nexting + 1;
 
-               priceOfTotalFlight = priceOfTotalFlight + tax + this.discount() + servicesFee;
+                if (nexting == 2) {
+                    if ($scope.checkbox_1 == true && $scope.checkbox_2 == true) {
+                        newPackaged.addService(priceBagaged);
+                        newPackaged.addService(priceInsurance);
 
-               toSliper();
-         }
-            
-            }else{
+                        //var promo1 = new Promotion1
+                        //newPackaged.getPrivilage(promo1); return ...
+                    } else if ($scope.checkbox_1 == true) {
+                        newPackaged.addService(priceBagaged);
+                    } else if ($scope.checkbox_2 == true) {
+                        newPackaged.addService(priceInsurance);
+                    }
+                    nexting = 0;
+                    //routing to slip page
+
+                    priceOfTotalFlight = priceOfTotalFlight + tax + this.discount() + servicesFee;
+
+                    toSliper();
+                }
+
+            } else {
                 alert('กรุณากรอกให้ครบทุกช่อง !');
+            }
         }
-    }
 
 
 
