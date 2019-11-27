@@ -1,0 +1,20 @@
+{
+  "name": "flight_ticketproject",
+  "version": "1.0.0",
+  "description": "How to run web",
+  "main": "js/config_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node js/config_server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolandSyncrozice/Flight_TicketProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PolandSyncrozice/Flight_TicketProject/issues"
+  },
+  "homepage": "https://github.com/PolandSyncrozice/Flight_TicketProject#readme"
+}
