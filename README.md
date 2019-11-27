@@ -1,14 +1,5 @@
 ﻿# Flight_TicketStore
  
-Credit members
-
-  Naratip Paedilokkul        6009610020
-  
-  Sorraurt Puridetchaiyapat  6009680015
-  
-  Sirapop Chatarupa          6009680049
-  
-
 How to run web 
 
 Pre - requisite ->
@@ -23,3 +14,11 @@ Getting Started ->
 http://localhost:8080/ 
 
 Congrate!!
+
+Credit members
+
+  Naratip Paedilokkul        6009610020
+  
+  Sorraurt Puridetchaiyapat  6009680015
+  
+  Sirapop Chatarupa          6009680049
