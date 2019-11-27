@@ -1,9 +1,9 @@
 ﻿# Flight_TicketStore
  
-//Credit members
- 1.Naratip Paedilokkul        6009610020
- 2.Sorraurt Puridetchaiyapat  6009680015
- 3.Sirapop Chatarupa          6009680049
+Credit members ->
+  1.Naratip Paedilokkul        6009610020
+  2.Sorraurt Puridetchaiyapat  6009680015
+  3.Sirapop Chatarupa          6009680049
 
 How to run web 
 
